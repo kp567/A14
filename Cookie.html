@@ -1,0 +1,71 @@
+<!Doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="cookie.css">
+		<script>
+			var x = {};
+			function saveCookies(){
+			
+				x["fname"] = document.getElementById("firstn").value;
+				x["lname"] = document.getElementById("lastn").value.toString();
+	
+				document.cookie = "";
+				var expiresAttrib = new Date(Date.now()+60*60*1000).toString();
+				var cookieString = "";
+				for (var key in x){
+					cookieString = key+"="+x[key]+";"+expiresAttrib+";";
+					document.cookie = cookieString;
+				}
+	
+				document.getElementById("out").innerHTML = document.cookie;
+			}
+			function loadCookies(){
+			
+				x = {};
+				var kv = document.cookie.split(";");
+				for (var id in kv){
+					var cookie = kv[id].split("=");
+					x[cookie[0].trim()] = cookie[1];
+				}
+				document.getElementById("firstn").value = x["fname"];
+				document.getElementById("lastn").value = x["lname"];
+			}
+		</script>
+	</head>
+	<body>
+		<main>
+		<h1>My Cookies Example - A14</h1>
+			<div>
+			First Name: <input type="text" id="firstn"><br>
+			Last Name: <input type="text" id="lastn"><br>
+			</div>
+			<div class="inst">
+			<p>
+			<strong>Instructions</strong><br>
+			:: Must Be Using FireFox<br>
+			:: Chrome Does not allow cookies<br>
+			Step 1 - Enter First and Last Name<br>
+			Step 2 - Click "Save to Cookie"<br>
+			Step 3 - Erase input fields<br>
+			Step 4 - Reload Page<br>
+			Step 5 - Click Load Cookies
+			</p>
+			</div>
+			<button onclick="saveCookies()">Save to Cookies</button>
+			<button onclick="loadCookies()">Load from Cookies</button>
+			
+			<div>
+			<br><br><br><br>
+			<p>Cookie Save:</p>	
+			<p id="out">fname=______lname=_______</p>
+			</div>
+		</main>
+		<footer>
+		<p>&copy 2019, New Jersey Institue of Technology<br>
+		Course: Intro To Web Development<br>
+		Prof: Arthur Hendela<br>
+		Prepared by: Krushil Patel<br>Due date: November 20, 2019</p>
+		</footer>
+	</body>
+			
+</html>
